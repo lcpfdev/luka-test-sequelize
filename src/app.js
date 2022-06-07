@@ -1,27 +1,27 @@
 const yargs = require("yargs");
 const { sequelize } = require("./db/connection");
 const {
-  addMovie,
-  listMovies,
-  updateMovie,
-  deleteMovie,
-} = require("./movie/functions");
+  addtvShows,
+  listtvShows,
+  updatetvShows,
+  deletetvShows,
+} = require("./tvShows/functions");
 
 const app = async (yargsObj) => {
   try {
     await sequelize.sync();
     if (yargsObj.add) {
-      //take movie key value pairs from yargsObj, send them to an add function and return movie.
-      await addMovie({ title: yargsObj.title, actor: yargsObj.actor });
+      //take tvShows key value pairs from yargsObj, send them to an add function and return tvShows.
+      await addtvShows({ title: yargsObj.title, actor: yargsObj.actor });
     } else if (yargsObj.list) {
-      //list all movies from database
-      await listMovies();
+      //list all tvShowss from database
+      await listtvShows();
     } else if (yargsObj.update) {
       //take filter and update k/v pairs from yargsObj, send them to update function and return success/failure message
-      await updateMovie({ actor: yargsObj.actor }, { title: yargsObj.title });
+      await updatetvShows({ actor: yargsObj.actor }, { title: yargsObj.title });
     } else if (yargsObj.delete) {
       //take filter k/v pair from yargsObj and send to delete function, return success/failure message
-      await deleteMovie({ title: yargsObj.title });
+      await deletetvShows({ title: yargsObj.title });
     } else {
       console.log("Incorrect command");
     }
